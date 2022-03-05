@@ -1,0 +1,32 @@
+{
+  "name": "employeetracker",
+  "version": "1.0.0",
+  "description": "## Your Task",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lewisemarcus/EmployeeTracker.git"
+  },
+  "author": "Marcus Lewis",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lewisemarcus/EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/lewisemarcus/EmployeeTracker#readme"
+}
