@@ -5,22 +5,22 @@ import { app } from './app.js'
 const PORT = process.env.PORT || 3001
 
 // Connect to database
-const db = () => {
- return mysql.createConnection(
+const db = mysql.createConnection(
   {
     host: 'localhost',
     // MySQL username,
     user: 'root',
     //MySQL password
     password: 'root',
-    database: ''
+    database: 'employees_db'
   },
   console.log(`Connected to the 'employees_db' database.`)
 )
-}
+
+const database = () => db
 
 const listen = () => app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  console.log(`\r\nServer running at http://localhost:${PORT}`)
 })
 
-export { db, listen }
+export { database, listen, PORT, db }

@@ -23,17 +23,23 @@ function init() {
         .then(function (choice) {
             switch (choice.options) {
                 case 'View All Roles':
+                    init()
                     break
                 case 'View All Employees':
                     viewEmployees()
+                    init()
                     break
                 case 'Add Department':
+                    init()
                     break
                 case 'Add Role':
+                    init()
                     break
                 case 'Add Employee':
+                    init()
                     break
                 case 'Update Employee Info':
+                    init()
                     break
             }
         })

@@ -1,9 +1,9 @@
+import { database, listen } from '../server.js'
+
 import { init } from './scripts/inquirer.js'
 
-import { db } from '../server.js'
-
-const database = db()
+database()
 
 init()
 
-export { database }
+listen()
