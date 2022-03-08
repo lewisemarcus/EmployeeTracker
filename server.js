@@ -1,11 +1,12 @@
 // Import and require mysql2
-const mysql = require('mysql2')
-const app = require('./app')
+import mysql from 'mysql2'
+import { app } from './app.js'
 
 const PORT = process.env.PORT || 3001
 
 // Connect to database
-const db = mysql.createConnection(
+const db = () => {
+ return mysql.createConnection(
   {
     host: 'localhost',
     // MySQL username,
@@ -16,12 +17,10 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the 'employees_db' database.`)
 )
+}
 
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-  res.status(404).end()
+const listen = () => app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-  })
+export { db, listen }

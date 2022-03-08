@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "## Your Task",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -17,7 +18,8 @@
   "dependencies": {
     "console.table": "^0.10.0",
     "inquirer": "^8.2.0",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "node-fetch": "^3.2.2"
   },
   "devDependencies": {
     "jest": "^27.5.1",

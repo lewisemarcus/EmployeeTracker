@@ -35,7 +35,7 @@ CREATE TABLE titles (
     ON DELETE SET NULL
 );
 
--- Creates a table of managers from the employee table with manager's name and id --
+-- Creates a table of managers from the employee table with manager's name and id ADD AUTO_INC --
 DROP TABLE IF EXISTS managers;
 CREATE TABLE managers (
     manager_name VARCHAR(100) PRIMARY KEY,

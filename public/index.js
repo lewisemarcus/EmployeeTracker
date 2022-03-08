@@ -1,3 +1,9 @@
-const inquirer = require('./scripts/inquirer')
+import { init } from './scripts/inquirer.js'
 
-inquirer.init()
+import { db } from '../server.js'
+
+const database = db()
+
+init()
+
+export { database }

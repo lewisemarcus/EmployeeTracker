@@ -1,13 +1,19 @@
-const express = require('express')
-const viewEmployees = require('./routes/viewEmployees')
 const app = express()
+
+import express from 'express'
+import { viewEmRouter } from './routes/viewEmployees.js'
 
 // Express middleware
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-app.use('public')
+app.use(express.static('public'))
 
-app.use('/api/viewEmployees', viewEmployees)
+// Default response for any other request (Not Found)
+app.use((req, res) => {
+    res.status(404).end()
+})
 
-module.exports = app
+app.use('/api/viewEmployees', viewEmRouter)
+
+export { app }

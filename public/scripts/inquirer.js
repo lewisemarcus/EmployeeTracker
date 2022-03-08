@@ -1,4 +1,6 @@
-const inquirer = require('inquirer')
+import { viewEmployees } from '../../routes/viewEmployees.js'
+
+import inquirer from 'inquirer'
 
 const questions = [
     {
@@ -19,8 +21,22 @@ const questions = [
 function init() {
     inquirer.prompt(questions)
         .then(function (choice) {
-
+            switch (choice.options) {
+                case 'View All Roles':
+                    break
+                case 'View All Employees':
+                    viewEmployees()
+                    break
+                case 'Add Department':
+                    break
+                case 'Add Role':
+                    break
+                case 'Add Employee':
+                    break
+                case 'Update Employee Info':
+                    break
+            }
         })
 }
 
-module.exports = init
+export { init }
