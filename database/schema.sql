@@ -15,7 +15,7 @@ CREATE TABLE employees (
     salary INT NOT NULL,
     department VARCHAR(100) NOT NULL,
     full_name VARCHAR(400) DEFAULT ' ',
-    employee_info VARCHAR(100)
+    employee_info VARCHAR(400)
 );
 
 -- Creates department table with department's name and id --
@@ -50,6 +50,9 @@ UPDATE employees
 SET full_name = CONCAT(first_name, ' ', last_name);
 
 -- Adds the employee id and full_name column as PRIMARY KEYS --
+UPDATE employees
+SET employee_info = CONCAT(employee_id, ', ', full_name);
+
 ALTER TABLE employees
 ADD CONSTRAINT employee_info 
 PRIMARY KEY (employee_id, full_name);

@@ -1,4 +1,4 @@
-import { viewEmRouter } from './routes/viewEmployees.js'
+import { viewEmRouter } from '../routes/viewEmployees.js'
 import express from 'express'
 const app = express()
 

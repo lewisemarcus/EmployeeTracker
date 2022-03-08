@@ -1,7 +1,8 @@
 import express from 'express'
 const viewEmRouter = express.Router()
 import fetch from "node-fetch"
-import { PORT, db } from '../server.js'
+import { PORT, db } from '../public/server.js'
+import cTable from 'console.table'
 
 const viewEmployees = () =>
     fetch(`http://localhost:${PORT}/api/viewEmployees`, {
@@ -30,7 +31,8 @@ viewEmRouter.get('/', (req, res) => {
             message: 'success',
             data: rows
         })
-        console.log(result)
+        
+        console.log(`\r\n${cTable.getTable(result)}`)
     })
 })
 

@@ -13,7 +13,7 @@ const questions = [
             'Add Department',
             'Add Role',
             'Add Employee',
-            'Update Employee Info'
+            `Update Employee Info\r\n`
         ]
     }
 ]
