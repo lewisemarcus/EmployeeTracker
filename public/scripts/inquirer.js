@@ -21,7 +21,7 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'title',
+        name: 'addTitle',
         message: 'What is the name of the role? ',
         when: (answers) => answers.options == 'Add Role',
         validate: (value) => {
@@ -32,18 +32,17 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'salary',
+        name: 'addSalary',
         message: 'What is the salary of the role?(Please enter a number): ',
-        when: (answers) => answers.title,
+        when: (answers) => answers.addTitle,
         validate: (value) => {
-            if (typeof parseInt(value) == 'number' && value.trim().length != 0) return true
-            else return `Please enter a number.`
-            
+            if (isNaN(value) || value.trim().length == 0) return `Please enter a number`
+            else return true
         }
     },
     {
         type: 'list',
-        name: 'department',
+        name: 'chooseDepartment',
         message: 'Which department does the role belong to? ',
         choices: [`Engineering`,
                 `Finance`,
@@ -51,7 +50,7 @@ const questions = [
                 `Sales`,
                 `Service`
         ],
-        when: (answers) => answers.salary
+        when: (answers) => answers.addSalary
     }
 ]
 

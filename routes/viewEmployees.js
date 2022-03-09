@@ -5,7 +5,7 @@ import { PORT, db } from '../public/server/server.js'
 import cTable from 'console.table'
 import { init } from '../public/scripts/inquirer.js'
 
-//Fetch request for use in Node terminal to retreive all employee information.
+//Fetch request for use in Node terminal to retrieve all employee information.
 const viewEmployees = () =>
     fetch(`http://localhost:${PORT}/api/viewEmployees`, {
         method: 'GET',
@@ -25,11 +25,10 @@ const viewEmployees = () =>
 //Get method request to view all employees.
 viewEmRouter.get('/', (req, res) => {
     const sql = `SELECT * FROM employees`
+
     db.query(sql, (err, result, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message })
-            return
-        }
+        if (err) throw err
+
         //Sends a json response containing a success note and the list of employees.
         res.json({
             message: 'success',

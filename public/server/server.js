@@ -16,11 +16,15 @@ const db = mysql.createConnection(
     database: 'employees_db'
   },
   console.log(`Connected to the 'employees_db' database.
-  \r\nServer running at http://localhost:${PORT}`)
+  \r\nServer running at http://localhost:${PORT}\r\n`)
+
 )
 
-const database = () => db
+//Source latest schema
+db.query(`SOURCE schema.sql`, (err) => {
+  if (err) throw err
+})
 
 http.createServer(app).listen(PORT)
 
-export { database, PORT, db }
+export { PORT, db }
