@@ -1,5 +1,7 @@
 import { viewEmployees } from '../../routes/viewEmployees.js'
 
+import { addRole } from '../../routes/newRole.js'
+
 import inquirer from 'inquirer'
 
 const questions = [
@@ -16,6 +18,40 @@ const questions = [
             `Update Employee Info`,
             `Quit`
         ]
+    },
+    {
+        type: 'input',
+        name: 'title',
+        message: 'What is the name of the role? ',
+        when: (answers) => answers.options == 'Add Role',
+        validate: (value) => {
+            if(value.split(' ').length < 1) return `Please enter a title.`
+            if (typeof value == "string" && value.trim().length != 0 && (/\d/.test(value) == false)) return true
+            else return `Please enter a title for the role.`
+        }
+    },
+    {
+        type: 'input',
+        name: 'salary',
+        message: 'What is the salary of the role?(Please enter a number): ',
+        when: (answers) => answers.title,
+        validate: (value) => {
+            if (typeof parseInt(value) == 'number' && value.trim().length != 0) return true
+            else return `Please enter a number.`
+            
+        }
+    },
+    {
+        type: 'list',
+        name: 'department',
+        message: 'Which department does the role belong to? ',
+        choices: [`Engineering`,
+                `Finance`,
+                `Legal`,
+                `Sales`,
+                `Service`
+        ],
+        when: (answers) => answers.salary
     }
 ]
 
@@ -25,19 +61,16 @@ function init() {
             switch (choice.options) {
                 case 'View All Roles':
                     viewRoles()
-                    init()
                     break
                 case 'View All Employees':
                     viewEmployees()
-                    init()
                     break
                 case 'Add Department':
                     addDepartment()
                     init()
                     break
                 case 'Add Role':
-                    addRole()
-                    init()
+                    addRole(choice)
                     break
                 case 'Add Employee':
                     addEmployee()
@@ -47,6 +80,8 @@ function init() {
                     UpdateEmployee()
                     init()
                     break
+                case 'Quit':
+                    process.exit()
             }
         })
 }
