@@ -13,7 +13,8 @@ const questions = [
             'Add Department',
             'Add Role',
             'Add Employee',
-            `Update Employee Info\r\n`
+            `Update Employee Info`,
+            `Quit`
         ]
     }
 ]
@@ -23,6 +24,7 @@ function init() {
         .then(function (choice) {
             switch (choice.options) {
                 case 'View All Roles':
+                    viewRoles()
                     init()
                     break
                 case 'View All Employees':
@@ -30,15 +32,19 @@ function init() {
                     init()
                     break
                 case 'Add Department':
+                    addDepartment()
                     init()
                     break
                 case 'Add Role':
+                    addRole()
                     init()
                     break
                 case 'Add Employee':
+                    addEmployee()
                     init()
                     break
                 case 'Update Employee Info':
+                    UpdateEmployee()
                     init()
                     break
             }

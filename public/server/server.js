@@ -1,6 +1,7 @@
 // Import and require mysql2
 import mysql from 'mysql2'
-import { app } from './app.js'
+import { app } from '../app/app.js'
+import http from 'http'
 
 const PORT = process.env.PORT || 3001
 
@@ -14,13 +15,12 @@ const db = mysql.createConnection(
     password: 'root',
     database: 'employees_db'
   },
-  console.log(`Connected to the 'employees_db' database.`)
+  console.log(`Connected to the 'employees_db' database.
+  \r\nServer running at http://localhost:${PORT}`)
 )
 
 const database = () => db
 
-const listen = () => app.listen(PORT, () => {
-  console.log(`\r\nServer running at http://localhost:${PORT}`)
-})
+http.createServer(app).listen(PORT)
 
-export { database, listen, PORT, db }
+export { database, PORT, db }
