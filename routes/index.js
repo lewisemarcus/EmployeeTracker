@@ -2,6 +2,8 @@ import { db, PORT } from '../public/server/server.js'
 import express from 'express'
 import fetch from 'node-fetch'
 import cTable from 'console.table'
+import { init } from '../public/scripts/inquirer.js'
+
 const indexRouter = express.Router()
 
 const loadEmployees = () =>
@@ -16,6 +18,8 @@ const loadEmployees = () =>
         })
         .then((data) => {
             data
+            //Initialize inquirer.
+            init()
         })
         .catch((error) => {
             console.error('Error:', error)
