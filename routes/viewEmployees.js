@@ -27,8 +27,8 @@ viewEmRouter.get('/', (req, res) => {
     const sql = `SELECT * FROM employees`
 
     db.query(sql, (err, result, rows) => {
-        if (err) throw err
-
+        if (err) console.error(err)
+        else {
         //Sends a json response containing a success note and the list of employees.
         res.json({
             message: 'success',
@@ -37,6 +37,7 @@ viewEmRouter.get('/', (req, res) => {
 
         //Logs the table of employees to the user's console for viewing.
         console.log(`\r\n${cTable.getTable(result)}`)
+        }
     })
 })
 

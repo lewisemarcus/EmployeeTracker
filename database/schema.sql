@@ -12,6 +12,7 @@ CREATE TABLE employees (
     last_name VARCHAR(100) NOT NULL,
     title VARCHAR(100) NOT NULL,
     manager VARCHAR(100),
+    manager_id INT,
     department VARCHAR(100) NOT NULL,
     full_name VARCHAR(400) DEFAULT ' ',
     employee_info VARCHAR(400)
@@ -39,9 +40,9 @@ CREATE TABLE titles (
 -- Creates a table of managers from the employee table with manager's name and id ADD AUTO_INC --
 DROP TABLE IF EXISTS managers;
 CREATE TABLE managers (
-    manager_name VARCHAR(100) PRIMARY KEY,
+    manager_name VARCHAR(100),
     manager_ref VARCHAR(100),
-    manager_id INT
+    manager_id INT AUTO_INCREMENT PRIMARY KEY
 );
 
 SOURCE seeds.sql;

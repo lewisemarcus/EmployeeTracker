@@ -1,5 +1,7 @@
 import { viewEmRouter } from '../../routes/viewEmployees.js'
 import { newRoleRouter } from '../../routes/newRole.js'
+import { indexRouter } from '../../routes/index.js'
+import { db } from '../server/server.js'
 import express from 'express'
 const app = express()
 
@@ -9,6 +11,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 app.use(express.static('public'))
+
+app.use('*', indexRouter)
 
 app.use('/api/newRole', newRoleRouter)
 
