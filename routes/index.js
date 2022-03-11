@@ -18,6 +18,7 @@ const loadEmployees = () =>
         })
         .then((data) => {
             data
+            
             //Initialize inquirer.
             init()
         })
@@ -26,14 +27,16 @@ const loadEmployees = () =>
         })
 
 indexRouter.get('/', (req, res) => {
+    
     //Displays employees in console once database connection is established.
-    db.query(`SELECT * FROM employees`, (err, result) => {
+    db.query(`SELECT * FROM employees;`, (err, result) => {
         if (err) console.error(err)
         else {
             res.json({
                 message: 'success',
                 body: result
             })
+
             //Logs the table of employees to the user's console for viewing.
             console.log(`\r\n${cTable.getTable(result)}`)
         }

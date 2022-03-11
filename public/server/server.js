@@ -2,7 +2,6 @@
 import mysql from 'mysql2'
 import { app } from '../app/app.js'
 import http from 'http'
-import { loadEmployees } from '../../routes/index.js'
 
 const PORT = process.env.PORT || 3001
 

@@ -30,4 +30,4 @@ ON DELETE SET NULL;
 
 -- SHOW TABLES; --
 
-SELECT * FROM employees;
+-- SELECT * FROM employees; --

@@ -1,6 +1,7 @@
 import { viewEmployees } from '../../routes/viewEmployees.js'
-
 import { addRole } from '../../routes/newRole.js'
+import { viewRoles } from '../../routes/viewRoles.js'
+import { viewDepartments, getDepartments } from '../../routes/viewDepartments.js'
 
 import inquirer from 'inquirer'
 
@@ -25,7 +26,7 @@ const questions = [
         message: 'What is the name of the role? ',
         when: (answers) => answers.options == 'Add Role',
         validate: (value) => {
-            if(value.split(' ').length < 1) return `Please enter a title.`
+            if (value.split(' ').length < 1) return `Please enter a title.`
             if (typeof value == "string" && value.trim().length != 0 && (/\d/.test(value) == false)) return true
             else return `Please enter a title for the role.`
         }
@@ -41,16 +42,13 @@ const questions = [
         }
     },
     {
-        type: 'list',
+        type: 'input',
         name: 'chooseDepartment',
-        message: 'Which department does the role belong to? ',
-        choices: [`Engineering`,
-                `Finance`,
-                `Legal`,
-                `Sales`,
-                `Service`
-        ],
-        when: (answers) => answers.addSalary
+        message: `Current departments: `,
+        when: (answers) => {
+            getDepartments()
+            return answers.addSalary
+        }
     }
 ]
 
@@ -58,6 +56,9 @@ function init() {
     inquirer.prompt(questions)
         .then(function (choice) {
             switch (choice.options) {
+                case 'View All Departments':
+                    viewDepartments()
+                    break
                 case 'View All Roles':
                     viewRoles()
                     break
@@ -65,19 +66,16 @@ function init() {
                     viewEmployees()
                     break
                 case 'Add Department':
-                    addDepartment()
-                    init()
+                    addDepartment(choice)
                     break
                 case 'Add Role':
                     addRole(choice)
                     break
                 case 'Add Employee':
-                    addEmployee()
-                    init()
+                    addEmployee(choice)
                     break
                 case 'Update Employee Info':
-                    UpdateEmployee()
-                    init()
+                    UpdateEmployee(choice)
                     break
                 case 'Quit':
                     process.exit()

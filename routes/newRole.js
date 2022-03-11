@@ -22,25 +22,26 @@ const addRole = (role) =>
     .catch((error) => console.error('Error:', error))
 
 newRoleRouter.post('/', ({body}, res) => {
-    const sql = `INSERT INTO titles
-    (title_name, salary, department_id)
-    VALUES (?)`
-
     let departmentId
+  
     const getIdsql = `SELECT * FROM departments
     WHERE department_name='${body.addDepartment}'`
 
     //Query to retrieve department_id 
     db.query(getIdsql, (err, result, rows) => {
-        if (err) throw err
-        departmentId = result
-        console.log(result)
+        if (err) console.error(err)
+        else {
+            departmentId = result
+            console.log(result)
+        }
     })
-    const params = [body.addTitle, parseInt(body.addSalary), departmentId]
+    console.log(departmentId)
 
+    const sql = `INSERT INTO titles
+    (title_name, salary, department_id)
+    VALUES (${body.addTitle}, ${parseInt(body.addSalary)}, ${departmentId})`
 
-
-    db.query(sql, params, (err, result) => {
+    db.query(sql, (err, result) => {
         if (err) throw err
 
         //Sends a json response containing a success note and the information of the role added.

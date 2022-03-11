@@ -1,7 +1,8 @@
 import { viewEmRouter } from '../../routes/viewEmployees.js'
 import { newRoleRouter } from '../../routes/newRole.js'
+import { viewRolesRouter } from '../../routes/viewRoles.js'
+import { viewDeptRouter } from '../../routes/viewDepartments.js'
 import { indexRouter } from '../../routes/index.js'
-import { db } from '../server/server.js'
 import express from 'express'
 const app = express()
 
@@ -12,11 +13,15 @@ app.use(express.json())
 
 app.use(express.static('public'))
 
-app.use('*', indexRouter)
-
 app.use('/api/newRole', newRoleRouter)
 
+app.use('/api/viewRoles', viewRolesRouter)
+
 app.use('/api/viewEmployees', viewEmRouter)
+
+app.use('/api/viewDepartments', viewDeptRouter)
+
+app.use('*', indexRouter)
 
 // Default response for any other request (Not Found).
 app.use((req, res) => {

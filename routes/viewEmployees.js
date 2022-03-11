@@ -18,17 +18,15 @@ const viewEmployees = () =>
             data
             init()
         })
-        .catch((error) => {
-            console.error('Error:', error)
-        })
+        .catch((error) => console.error('Error:', error))
 
 //Get method request to view all employees.
 viewEmRouter.get('/', (req, res) => {
-    const sql = `SELECT * FROM employees`
-
+    const sql = `SELECT * FROM employees;`
     db.query(sql, (err, result, rows) => {
         if (err) console.error(err)
         else {
+            
         //Sends a json response containing a success note and the list of employees.
         res.json({
             message: 'success',
