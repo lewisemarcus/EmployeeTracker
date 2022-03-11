@@ -13,17 +13,17 @@ const addRole = (role) =>
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(role)
-    })      
-    .then((response) => response.json())
-    .then((data) => {
-        data
-        init()
     })
-    .catch((error) => console.error('Error:', error))
+        .then((response) => response.json())
+        .then((data) => {
+            data
+            init()
+        })
+        .catch((error) => console.error('Error:', error))
 
-newRoleRouter.post('/', ({body}, res) => {
+newRoleRouter.post('/', ({ body }, res) => {
     let departmentId
-  
+
     const getIdsql = `SELECT * FROM departments
     WHERE department_name='${body.addDepartment}'`
 
@@ -31,11 +31,12 @@ newRoleRouter.post('/', ({body}, res) => {
     db.query(getIdsql, (err, result, rows) => {
         if (err) console.error(err)
         else {
+            console.log("rows", `${cTable.getTable(rows)}`)
             departmentId = result
-            console.log(result)
+            console.log("result", result)
         }
     })
-    console.log(departmentId)
+    console.log("department id", departmentId)
 
     const sql = `INSERT INTO titles
     (title_name, salary, department_id)

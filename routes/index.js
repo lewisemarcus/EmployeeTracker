@@ -18,7 +18,7 @@ const loadEmployees = () =>
         })
         .then((data) => {
             data
-            
+
             //Initialize inquirer.
             init()
         })
@@ -27,7 +27,7 @@ const loadEmployees = () =>
         })
 
 indexRouter.get('/', (req, res) => {
-    
+
     //Displays employees in console once database connection is established.
     db.query(`SELECT * FROM employees;`, (err, result) => {
         if (err) console.error(err)

@@ -16,8 +16,8 @@ const viewDepartments = () =>
     })
         .then((response) => response.json())
         .then((data) => {
-            data
             init()
+            return data
         })
         .catch((error) => console.error('Error:', error))
 
@@ -30,7 +30,10 @@ const getDepartments = () =>
         }
     })
         .then((response) => response.json())
-        .then((data) => data)
+        .then((data) => {
+            console.log(`\r\nEnter the department the role belongs to:  `)
+            return data
+        })
         .catch((error) => console.error('Error:', error))
 
 //Get method request to view all departments.
@@ -39,16 +42,15 @@ viewDeptRouter.get('/', (req, res) => {
     db.query(sql, (err, result, rows) => {
         if (err) console.error(err)
         else {
-            
-        //Sends a json response containing a success note and the list of departments.
-        res.json({
-            message: 'success',
-            data: result
-        })
 
-        //Logs the table of departments to the user's console for viewing.
-        console.log(`\r\n${cTable.getTable(result)}`)
-        console.log('Enter the department the role belongs to:  ')
+            //Sends a json response containing a success note and the list of departments.
+            res.json({
+                message: 'success',
+                data: result
+            })
+
+            //Logs the table of departments to the user's console for viewing.
+            console.log(`\r\nCurrent Departments\r\n${cTable.getTable(result)}`)
         }
     })
 })

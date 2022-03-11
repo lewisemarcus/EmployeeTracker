@@ -1,9 +1,10 @@
 import { viewEmployees } from '../../routes/viewEmployees.js'
 import { addRole } from '../../routes/newRole.js'
-import { viewRoles } from '../../routes/viewRoles.js'
+import { viewRoles, getRoles } from '../../routes/viewRoles.js'
 import { viewDepartments, getDepartments } from '../../routes/viewDepartments.js'
 
 import inquirer from 'inquirer'
+
 
 const questions = [
     {
@@ -23,8 +24,11 @@ const questions = [
     {
         type: 'input',
         name: 'addTitle',
-        message: 'What is the name of the role? ',
-        when: (answers) => answers.options == 'Add Role',
+        message: ' ',
+        when: (answers) => {
+            if(answers.options == 'Add Role') getRoles()
+            return answers.options == 'Add Role'
+        },
         validate: (value) => {
             if (value.split(' ').length < 1) return `Please enter a title.`
             if (typeof value == "string" && value.trim().length != 0 && (/\d/.test(value) == false)) return true
@@ -44,9 +48,9 @@ const questions = [
     {
         type: 'input',
         name: 'chooseDepartment',
-        message: `Current departments: `,
+        message: ' ',
         when: (answers) => {
-            getDepartments()
+            if(answers.addSalary) getDepartments()
             return answers.addSalary
         }
     }

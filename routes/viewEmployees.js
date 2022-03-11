@@ -15,8 +15,8 @@ const viewEmployees = () =>
     })
         .then((response) => response.json())
         .then((data) => {
-            data
             init()
+            return data       
         })
         .catch((error) => console.error('Error:', error))
 
