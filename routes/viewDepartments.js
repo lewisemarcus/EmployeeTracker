@@ -35,6 +35,18 @@ const getDepartments = () =>
             return data
         })
         .catch((error) => console.error('Error:', error))
+//Fetch request for use in Node terminal to retrieve all department information.
+
+const seeDepartments = () =>
+    fetch(`http://localhost:${PORT}/api/viewDepartments`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) => response.json())
+        .then((data) => data)
+        .catch((error) => console.error('Error:', error))
 
 //Get method request to view all departments.
 viewDeptRouter.get('/', (req, res) => {
@@ -55,4 +67,4 @@ viewDeptRouter.get('/', (req, res) => {
     })
 })
 
-export { viewDeptRouter, viewDepartments, getDepartments }
+export { viewDeptRouter, viewDepartments, getDepartments, seeDepartments }

@@ -1,9 +1,10 @@
 import { viewEmployees } from '../../routes/viewEmployees.js'
 import { addRole } from '../../routes/newRole.js'
 import { viewRoles, getRoles } from '../../routes/viewRoles.js'
-import { viewDepartments, getDepartments } from '../../routes/viewDepartments.js'
-
+import { viewDepartments, seeDepartments, getDepartments } from '../../routes/viewDepartments.js'
+import { addDept } from '../../routes/newDepartment.js'
 import inquirer from 'inquirer'
+const departments = []
 
 
 const questions = [
@@ -46,12 +47,25 @@ const questions = [
         }
     },
     {
-        type: 'input',
+        type: 'list',
         name: 'chooseDepartment',
+        message: 'Please assign a department to the role: ',
+        choices: departments,
+        when: (answers) => answers.addSalary
+    },
+    {
+        type: 'input',
+        name: 'addDepartment',
         message: ' ',
         when: (answers) => {
-            if(answers.addSalary) getDepartments()
-            return answers.addSalary
+            if(answers.options == 'Add Department') getDepartments()
+            return answers.options == 'Add Department'
+        },
+        validate: (value) => {
+            if (value.split(' ').length < 1) return `Please enter a department.`
+            if (departments.indexOf(value) != -1) return `Department already exists. Please enter a unique department name.`
+            if (typeof value == "string" && value.trim().length != 0 && (/\d/.test(value) == false)) return true
+            else return `Please enter a department.`
         }
     }
 ]
@@ -70,7 +84,7 @@ function init() {
                     viewEmployees()
                     break
                 case 'Add Department':
-                    addDepartment(choice)
+                    addDept(choice)
                     break
                 case 'Add Role':
                     addRole(choice)
@@ -87,4 +101,4 @@ function init() {
         })
 }
 
-export { init }
+export { init, departments }

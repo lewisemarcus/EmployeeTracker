@@ -2,6 +2,7 @@ import { viewEmRouter } from '../../routes/viewEmployees.js'
 import { newRoleRouter } from '../../routes/newRole.js'
 import { viewRolesRouter } from '../../routes/viewRoles.js'
 import { viewDeptRouter } from '../../routes/viewDepartments.js'
+import { newDeptRouter } from '../../routes/newDepartment.js'
 import { indexRouter } from '../../routes/index.js'
 import express from 'express'
 const app = express()
@@ -16,6 +17,8 @@ app.use(express.static('public'))
 app.use('/api/newRole', newRoleRouter)
 
 app.use('/api/viewRoles', viewRolesRouter)
+
+app.use('/api/newDepartment', newDeptRouter)
 
 app.use('/api/viewEmployees', viewEmRouter)
 
