@@ -26,6 +26,7 @@ const db = mysql.createConnection(
 
 const sql = `SELECT department_name from departments;`
 
+//Function to retrieve departments after database connection.
 const updateDepts = () => db.query(sql, (err, result) => {
     if (err) console.error(err)
     else {

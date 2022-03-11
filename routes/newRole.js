@@ -49,7 +49,6 @@ newRoleRouter.post('/', ({ body }, res) => {
                 //Logs the table of titles to the user's console for viewing.
                 console.log(`\r\n${cTable.getTable(result)}`))
             })
-
         }
     })
 })
