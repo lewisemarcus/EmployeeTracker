@@ -64,7 +64,7 @@ node index.js
 
   ## Walkthrough
 
-  Here is a link to a video going over the steps to use the application: [Employee Tracker Demo](https://www.youtube.com/watch?v=670f71LTWpM)
+  Here is a link to a video going over the steps to use the application: [Employee Tracker Demo](https://youtu.be/VmNTqdln7sw)
 
   ## Usage
   
