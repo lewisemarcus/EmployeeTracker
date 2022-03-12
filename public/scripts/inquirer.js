@@ -5,6 +5,9 @@ import { addEmployee } from '../../routes/newEmployee.js'
 import { viewRoles, getRoles } from '../../routes/viewRoles.js'
 import { viewDepartments, getDepartments, seeDepartments } from '../../routes/viewDepartments.js'
 import { addDept } from '../../routes/newDepartment.js'
+import { deleteRole } from '../../routes/deleteRole.js'
+import { deleteDept } from '../../routes/deleteDept.js'
+import { deleteEm } from '../../routes/deleteEm.js'
 import inquirer from 'inquirer'
 
 const departments = []
@@ -23,8 +26,11 @@ const questions = [
             'Add Department',
             'Add Role',
             'Add Employee',
-            `Update Employee Role`,
-            `Quit`
+            'Update Employee Role',
+            'Delete Role',
+            'Delete Department',
+            'Delete Employee',
+            'Quit'
         ]
     },
     {
@@ -121,7 +127,29 @@ const questions = [
         message: 'Please select a role for the employee: ',
         choices: roles,
         when: (answers) => answers.chooseEmployee
-    }
+    },
+    {
+        type: 'list',
+        name: 'deleteRole',
+        message: 'Please select a role to delete: ',
+        choices: roles,
+        when: (answers) => answers.options == 'Delete Role'
+    },
+    {
+        type: 'list',
+        name: 'deleteDept',
+        message: 'Please select a department to delete: ',
+        choices: departments,
+        when: (answers) => answers.options == 'Delete Department'
+    },
+    {
+        type: 'list',
+        name: 'deleteEm',
+        message: 'Please select an employee to delete: ',
+        choices: employees,
+        when: (answers) => answers.options == 'Delete Employee'
+    },
+    
 ]
 
 function init() {
@@ -148,6 +176,15 @@ function init() {
                     break
                 case 'Update Employee Role':
                     updateRole(choice)
+                    break
+                case 'Delete Role':
+                    deleteRole(choice)
+                    break
+                case 'Delete Department':
+                    deleteDept(choice)
+                    break
+                case 'Delete Employee':
+                    deleteEm(choice)
                     break
                 case 'Quit':
                     process.exit()

@@ -6,6 +6,9 @@ import { viewRolesRouter } from '../../routes/viewRoles.js'
 import { viewDeptRouter } from '../../routes/viewDepartments.js'
 import { newDeptRouter } from '../../routes/newDepartment.js'
 import { indexRouter } from '../../routes/index.js'
+import { delRoleRouter } from '../../routes/deleteRole.js'
+import { delDeptRouter } from '../../routes/deleteDept.js'
+import{ delEmRouter } from '../../routes/deleteEm.js'
 import express from 'express'
 const app = express()
 
@@ -19,6 +22,12 @@ app.use(express.static('public'))
 app.use('/api/updateRole', updateEmRouter)
 
 app.use('/api/newRole', newRoleRouter)
+
+app.use('/api/deleteRole', delRoleRouter)
+
+app.use('/api/deleteDept', delDeptRouter)
+
+app.use('/api/deleteEm', delEmRouter)
 
 app.use('/api/newEmployee', newEmRouter)
 

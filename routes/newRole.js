@@ -23,12 +23,11 @@ const addRole = (role) =>
         .catch((error) => console.error('Error:', error))
 
 newRoleRouter.post('/', ({ body }, res) => {
-    console.log(body)
     const getIdsql = `SELECT * FROM departments
     WHERE department_name='${body.chooseDepartment}';`
 
     //Query to retrieve department_id 
-    db.query(getIdsql, (err, result, rows) => {
+    db.query(getIdsql, (err, result) => {
         if (err) console.error(err)
         else {
             const { department_id, department_name } = result[0]
