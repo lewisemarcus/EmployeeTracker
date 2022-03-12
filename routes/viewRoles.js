@@ -40,7 +40,7 @@ const getRoles = () =>
 //Get method request to view all roles.
 viewRolesRouter.get('/', (req, res) => {
     const sql = `SELECT * FROM titles;`
-    db.query(sql, (err, result, rows) => {
+    db.query(sql, (err, result) => {
         if (err) console.error(err)
         else {
 

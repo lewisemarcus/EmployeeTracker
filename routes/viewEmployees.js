@@ -26,7 +26,7 @@ viewEmRouter.get('/', (req, res) => {
     FROM employees 
     INNER JOIN titles ON titles.title_id=employees.title_id;`
     
-    db.query(sql, (err, result, rows) => {
+    db.query(sql, (err, result) => {
         if (err) console.error(err)
         else {
             

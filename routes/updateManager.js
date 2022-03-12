@@ -1,13 +1,13 @@
 import express from 'express'
-const updateEmRouter = express.Router()
+const updateManagerRouter = express.Router()
 import fetch from "node-fetch"
 import { PORT, db } from '../public/server/server.js'
 import cTable from 'console.table'
 import { init } from '../public/scripts/inquirer.js'
 
 //Update employee role fetch request.
-const updateRole = (employee) =>
-    fetch(`http://localhost:${PORT}/api/updateRole`, {
+const updateManager = (employee) =>
+    fetch(`http://localhost:${PORT}/api/updateManager`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -21,11 +21,11 @@ const updateRole = (employee) =>
         })
         .catch((error) => console.error('Error:', error))
 
-updateEmRouter.put('/', ({ body }, res) => {
+updateManagerRouter.put('/', ({ body }, res) => {
 
     const sql = `UPDATE employees
-    SET title = "${body.updateRole}"
-    WHERE full_name = '${body.chooseEmployee}';`
+    SET manager = "${body.updateManager}"
+    WHERE full_name = '${body.selectEmployee}';`
 
     db.query(sql, (err) => {
         if (err) console.error(err)
@@ -45,11 +45,11 @@ updateEmRouter.put('/', ({ body }, res) => {
                     })
 
                     //Logs the table of employees to the user's console for viewing.
-                    console.log(`\r\nNew Employee List:\r\n${cTable.getTable(result)}`)
+                    console.log(`\r\nUpdated Employee List:\r\n${cTable.getTable(result)}`)
                 }
             })
         }
     })
 })
 
-export { updateEmRouter, updateRole }
+export { updateManagerRouter, updateManager }

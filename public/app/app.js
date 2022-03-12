@@ -8,7 +8,8 @@ import { newDeptRouter } from '../../routes/newDepartment.js'
 import { indexRouter } from '../../routes/index.js'
 import { delRoleRouter } from '../../routes/deleteRole.js'
 import { delDeptRouter } from '../../routes/deleteDept.js'
-import{ delEmRouter } from '../../routes/deleteEm.js'
+import { delEmRouter } from '../../routes/deleteEm.js'
+import { updateManagerRouter } from '../../routes/updateManager.js'
 import express from 'express'
 const app = express()
 
@@ -20,6 +21,8 @@ app.use(express.json())
 app.use(express.static('public'))
 
 app.use('/api/updateRole', updateEmRouter)
+
+app.use('/api/updateManager', updateManagerRouter)
 
 app.use('/api/newRole', newRoleRouter)
 

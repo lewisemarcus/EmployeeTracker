@@ -3,12 +3,13 @@ import { viewEmployees } from '../../routes/viewEmployees.js'
 import { addRole } from '../../routes/newRole.js'
 import { addEmployee } from '../../routes/newEmployee.js'
 import { viewRoles, getRoles } from '../../routes/viewRoles.js'
-import { viewDepartments, getDepartments, seeDepartments } from '../../routes/viewDepartments.js'
+import { viewDepartments, seeDepartments } from '../../routes/viewDepartments.js'
 import { addDept } from '../../routes/newDepartment.js'
 import { deleteRole } from '../../routes/deleteRole.js'
 import { deleteDept } from '../../routes/deleteDept.js'
 import { deleteEm } from '../../routes/deleteEm.js'
 import inquirer from 'inquirer'
+import { updateManager } from '../../routes/updateManager.js'
 
 const departments = []
 const roles = []
@@ -27,6 +28,7 @@ const questions = [
             'Add Role',
             'Add Employee',
             'Update Employee Role',
+            'Update Employee Manager',
             'Delete Role',
             'Delete Department',
             'Delete Employee',
@@ -38,7 +40,7 @@ const questions = [
         name: 'addTitle',
         message: ' ',
         when: (answers) => {
-            if(answers.options == 'Add Role') getRoles()
+            if (answers.options == 'Add Role') getRoles()
             return answers.options == 'Add Role'
         },
         validate: (value) => {
@@ -69,7 +71,7 @@ const questions = [
         name: 'addDepartment',
         message: ' ',
         when: (answers) => {
-            if(answers.options == 'Add Department') seeDepartments()
+            if (answers.options == 'Add Department') seeDepartments()
             return answers.options == 'Add Department'
         },
         validate: (value) => {
@@ -85,7 +87,7 @@ const questions = [
         message: `'Please enter the employee's first and last name(separated by a space): `,
         when: (answers) => answers.options == 'Add Employee',
         validate: (value) => {
-            if(value.split(' ').length != 2 || value.split(' ').length != 3) return `Please enter a first and last name only.`
+            if (value.split(' ').length != 2 || value.split(' ').length != 3) return `Please enter a first and last name only.`
             if (typeof value == "string" && value.trim().length != 0 && value.indexOf(' ') != -1 && (/\d/.test(value) == false)) return true
             else return `Please enter the first and last name for the employee before continuing. `
         }
@@ -101,7 +103,7 @@ const questions = [
         type: 'list',
         name: 'managerYN',
         message: 'Is this employee a manager/lead?',
-        choices: ['Yes','No'],
+        choices: ['Yes', 'No'],
         when: (answers) => answers.chooseRole
     },
     {
@@ -110,7 +112,7 @@ const questions = [
         message: 'Please select a manager: ',
         choices: managers,
         when: (answers) => {
-            if(answers.managerYN == 'No') return true
+            if (answers.managerYN == 'No') return true
             else return false
         }
     },
@@ -123,10 +125,24 @@ const questions = [
     },
     {
         type: 'list',
+        name: 'selectEmployee',
+        message: 'Please select an employee to update their manager: ',
+        choices: employees,
+        when: (answers) => answers.options == `Update Employee Manager`
+    },
+    {
+        type: 'list',
         name: 'updateRole',
         message: 'Please select a role for the employee: ',
         choices: roles,
         when: (answers) => answers.chooseEmployee
+    },
+    {
+        type: 'list',
+        name: 'updateManager',
+        message: 'Please select a manager for the employee: ',
+        choices: managers,
+        when: (answers) => answers.selectEmployee
     },
     {
         type: 'list',
@@ -149,7 +165,7 @@ const questions = [
         choices: employees,
         when: (answers) => answers.options == 'Delete Employee'
     },
-    
+
 ]
 
 function init() {
@@ -176,6 +192,9 @@ function init() {
                     break
                 case 'Update Employee Role':
                     updateRole(choice)
+                    break
+                case 'Update Employee Manager':
+                    updateManager(choice)
                     break
                 case 'Delete Role':
                     deleteRole(choice)

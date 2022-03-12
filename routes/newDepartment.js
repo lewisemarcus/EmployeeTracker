@@ -29,24 +29,27 @@ newDeptRouter.post('/', ({ body }, res) => {
     VALUES ("${newDepartment}");`
 
     //Query to add new department.
-    db.query(sql, (err, result) => {
+    db.query(sql, (err) => {
         if (err) console.error(err)
         else {
 
             //Query to display departments.
             db.query(`SELECT department_name FROM departments;`, (err, result) => {
+                if (err) console.error(err)
+                else {
 
-                //Sends a json response containing a success note and the information of the department added.
-                res.json({
-                    message: 'success',
-                    data: body
-                })
+                    //Sends a json response containing a success note and the information of the department added.
+                    res.json({
+                        message: 'success',
+                        data: body
+                    })
 
-                //Logs the table of departments to the user's console for viewing.
-                console.log(`\r\n${cTable.getTable(result)}`)
+                    //Logs the table of departments to the user's console for viewing.
+                    console.log(`\r\n${cTable.getTable(result)}`)
 
-                //Update department list.
-                updateDepts()
+                    //Update department list.
+                    updateDepts()
+                }
             })
         }
     })

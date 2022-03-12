@@ -34,34 +34,36 @@ newEmRouter.post('/', ({ body }, res) => {
         VALUES ("${first_name}", "${last_name}", "${body.chooseRole}", "${full_name}")`
 
         //Query to update managers table.
-        db.query(employeeSql, (err, result) => {
+        db.query(employeeSql, (err) => {
             if (err) console.error(err)
             else {
                 const managerSql = `INSERT INTO managers
                 (manager_name)
                 VALUES ("${full_name}")`
 
-                db.query(managerSql, (err, result) => {
+                db.query(managerSql, (err) => {
                     if (err) console.error(err)
                     else {
 
                         //Query to display employees.
                         db.query(`SELECT full_name FROM employees;`, (err, result) => {
+                            if (err) console.error(err)
+                            else {
+                                //Sends a json response containing a success note and the information of the employee added.
+                                res.json({
+                                    message: 'success',
+                                    data: body
+                                })
 
-                            //Sends a json response containing a success note and the information of the employee added.
-                            res.json({
-                                message: 'success',
-                                data: body
-                            })
+                                //Logs the table of employees to the user's console for viewing.
+                                console.log(`\r\nNew Employee List:\r\n${cTable.getTable(result)}`)
 
-                            //Logs the table of employees to the user's console for viewing.
-                            console.log(`\r\nNew Employee List:\r\n${cTable.getTable(result)}`)
+                                //Update employee list
+                                updateEmployees()
 
-                            //Update employee list
-                            updateEmployees()
-
-                            //Update manager list.
-                            updateManagers()
+                                //Update manager list.
+                                updateManagers()
+                            }
                         })
                     }
                 })

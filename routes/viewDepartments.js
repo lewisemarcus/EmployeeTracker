@@ -54,7 +54,7 @@ const seeDepartments = () =>
 //Get method request to view all departments.
 viewDeptRouter.get('/', (req, res) => {
     const sql = `SELECT * FROM departments;`
-    db.query(sql, (err, result, rows) => {
+    db.query(sql, (err, result) => {
         if (err) console.error(err)
         else {
 
