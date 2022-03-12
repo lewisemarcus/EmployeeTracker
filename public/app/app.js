@@ -5,6 +5,7 @@ import { viewRolesRouter } from '../../routes/viewRoles.js'
 import { viewDeptRouter } from '../../routes/viewDepartments.js'
 import { newDeptRouter } from '../../routes/newDepartment.js'
 import { indexRouter } from '../../routes/index.js'
+import { updateEmRouter } from '../../routes/updateEmployeeRole.js'
 import express from 'express'
 const app = express()
 
@@ -14,6 +15,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 app.use(express.static('public'))
+
+app.use('/api/updateEmployeeRole', updateEmRouter)
 
 app.use('/api/newRole', newRoleRouter)
 

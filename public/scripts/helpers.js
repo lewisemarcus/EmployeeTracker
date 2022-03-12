@@ -4,8 +4,9 @@ function capitalizeFirstLetter(string) {
     let newString = ''
     for(let each of string) {
         each = each.charAt(0).toUpperCase() + each.slice(1).toLowerCase()
-        newString += each
+        newString +=each + " "
     }
+
     return newString
 }
 

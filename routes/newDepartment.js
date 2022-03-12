@@ -4,20 +4,18 @@ import fetch from "node-fetch"
 import { PORT, db, updateDepts } from '../public/server/server.js'
 import { init } from '../public/scripts/inquirer.js'
 import cTable from 'console.table'
+import { capitalizeFirstLetter } from '../public/scripts/helpers.js'
 
 //Add department fetch request.
-const addDept = (role) =>
+const addDept = (department) =>
     fetch(`http://localhost:${PORT}/api/newDepartment`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(role)
+        body: JSON.stringify(department)
     })
-        .then((response) => {
-            console.log(response)
-            return response.json()
-        })
+        .then((response) => response.json())
         .then((data) => {
             init()
             return data
@@ -25,9 +23,10 @@ const addDept = (role) =>
         .catch((error) => console.error('Error:', error))
 
 newDeptRouter.post('/', ({ body }, res) => {
+    const newDepartment = capitalizeFirstLetter(body.addDepartment)
     const sql = `INSERT INTO departments
     (department_name)
-    VALUES ("${body.addDepartment}");`
+    VALUES ("${newDepartment}");`
 
     //Query to add new department.
     db.query(sql, (err, result) => {

@@ -2,12 +2,14 @@ import { viewEmployees } from '../../routes/viewEmployees.js'
 import { addRole } from '../../routes/newRole.js'
 import { addEmployee } from '../../routes/newEmployee.js'
 import { viewRoles, getRoles } from '../../routes/viewRoles.js'
-import { viewDepartments, getDepartments } from '../../routes/viewDepartments.js'
+import { viewDepartments, getDepartments, seeDepartments } from '../../routes/viewDepartments.js'
 import { addDept } from '../../routes/newDepartment.js'
+import { updateRole } from '../../routes/updateEmployeeRole.js'
 import inquirer from 'inquirer'
 const departments = []
 const roles = []
 const managers = []
+const employees = []
 
 const questions = [
     {
@@ -20,7 +22,7 @@ const questions = [
             'Add Department',
             'Add Role',
             'Add Employee',
-            `Update Employee Info`,
+            `Update Employee Role`,
             `Quit`
         ]
     },
@@ -60,7 +62,7 @@ const questions = [
         name: 'addDepartment',
         message: ' ',
         when: (answers) => {
-            if(answers.options == 'Add Department') getDepartments()
+            if(answers.options == 'Add Department') seeDepartments()
             return answers.options == 'Add Department'
         },
         validate: (value) => {
@@ -91,7 +93,7 @@ const questions = [
     {
         type: 'list',
         name: 'managerYN',
-        message: 'Does this person have a manger?',
+        message: 'Is this employee a manager/lead?',
         choices: ['Yes','No'],
         when: (answers) => answers.chooseRole
     },
@@ -101,9 +103,23 @@ const questions = [
         message: 'Please select a manager: ',
         choices: managers,
         when: (answers) => {
-            if(answers.managerYN == 'Yes') return true
+            if(answers.managerYN == 'No') return true
             else return false
         }
+    },
+    {
+        type: 'list',
+        name: 'chooseEmployee',
+        message: 'Please select an employee to update their role: ',
+        choices: employees,
+        when: (answers) => answers.options == `Update Employee Role`
+    },
+    {
+        type: 'list',
+        name: 'updateRole',
+        message: 'Please select a new role for the employee: ',
+        choices: roles,
+        when: (answers) => answers.chooseEmployee
     }
 ]
 
@@ -130,7 +146,7 @@ function init() {
                     addEmployee(choice)
                     break
                 case 'Update Employee Info':
-                    UpdateEmployee(choice)
+                    updateRole(choice)
                     break
                 case 'Quit':
                     process.exit()
@@ -138,4 +154,4 @@ function init() {
         })
 }
 
-export { init, departments, roles, managers }
+export { init, departments, roles, managers, employees }
