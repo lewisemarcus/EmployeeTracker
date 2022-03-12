@@ -5,7 +5,6 @@ import { PORT, db } from '../public/server/server.js'
 import cTable from 'console.table'
 import { init } from '../public/scripts/inquirer.js'
 
-
 //Fetch request for use in Node terminal to retrieve all role information and restart init.
 const viewRoles = () =>
     fetch(`http://localhost:${PORT}/api/viewRoles`, {
