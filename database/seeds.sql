@@ -11,13 +11,14 @@ VALUES (1, "Lead Engineer", 170000, 1),
 (4, "Sales Lead", 120000, 4),
 (5, "Legal Team Mananger", 200000, 3);
 
-INSERT INTO managers (manager_name)
-VALUES ("Marcus Lewis"),
-    ("Jessi Magana"),
-    ("Rejean Chung");
-INSERT INTO employees (employee_id, first_name, last_name, title, manager, department)
-VALUES (1,"Marcus","Lewis","Lead Engineer", null, "Engineering"),
-    (2,"Jason", "Yoo", "Sales Intern", "Marcus Lewis", "Sales"),
-    (3, "Benjamin", "Wirth", "Sales Tech", "Jessi Magana", "Sales"),
-    (4, "Rejean", "Chung", "Legal Team Manager", null, "Legal"),
-    (5, "Jessi", "Magana", "Sales Lead", null, "Sales");
+INSERT INTO managers (manager_name, manager_id)
+VALUES ("Marcus Lewis", 1),
+    ("Jessi Magana", 2),
+    ("Rejean Chung", 3);
+
+INSERT INTO employees (employee_id, first_name, last_name, title, manager, manager_id)
+VALUES (1,"Marcus","Lewis","Lead Engineer", null, null),
+    (2,"Jason", "Yoo", "Sales Intern", "Marcus Lewis", 1),
+    (3, "Benjamin", "Wirth", "Sales Tech", "Jessi Magana", 2),
+    (4, "Rejean", "Chung", "Legal Team Manager", null, null),
+    (5, "Jessi", "Magana", "Sales Lead", null, null);

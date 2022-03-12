@@ -7,15 +7,14 @@ USE employees_db;
 -- Creates employee table with employee's first name, last name, title, id, salary, department, and manager(if applicable) --
 DROP TABLE IF EXISTS employees;
 CREATE TABLE employees (
-    employee_id INT NOT NULL,
+    employee_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     title VARCHAR(100) NOT NULL,
+    title_id INT,
     manager VARCHAR(100),
     manager_id INT,
-    department VARCHAR(100) NOT NULL,
-    full_name VARCHAR(400) DEFAULT ' ',
-    employee_info VARCHAR(400)
+    full_name VARCHAR(400) DEFAULT ' '
 );
 
 -- Creates department table with department's name and id --
@@ -41,7 +40,6 @@ CREATE TABLE titles (
 DROP TABLE IF EXISTS managers;
 CREATE TABLE managers (
     manager_name VARCHAR(100),
-    manager_ref VARCHAR(100),
     manager_id INT AUTO_INCREMENT PRIMARY KEY
 );
 

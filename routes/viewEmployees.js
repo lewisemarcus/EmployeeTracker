@@ -22,7 +22,7 @@ const viewEmployees = () =>
 
 //Get method request to view all employees.
 viewEmRouter.get('/', (req, res) => {
-    const sql = `SELECT * FROM employees;`
+    const sql = `SELECT employee_id, full_name, title, manager FROM employees;`
     db.query(sql, (err, result, rows) => {
         if (err) console.error(err)
         else {

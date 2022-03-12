@@ -1,11 +1,13 @@
 import { viewEmployees } from '../../routes/viewEmployees.js'
 import { addRole } from '../../routes/newRole.js'
+import { addEmployee } from '../../routes/newEmployee.js'
 import { viewRoles, getRoles } from '../../routes/viewRoles.js'
-import { viewDepartments, seeDepartments, getDepartments } from '../../routes/viewDepartments.js'
+import { viewDepartments, getDepartments } from '../../routes/viewDepartments.js'
 import { addDept } from '../../routes/newDepartment.js'
 import inquirer from 'inquirer'
 const departments = []
-
+const roles = []
+const managers = []
 
 const questions = [
     {
@@ -67,6 +69,41 @@ const questions = [
             if (typeof value == "string" && value.trim().length != 0 && (/\d/.test(value) == false)) return true
             else return `Please enter a department.`
         }
+    },
+    {
+        type: 'input',
+        name: 'employeeName',
+        message: `'Please enter the employee's first and last name(separated by a space): `,
+        when: (answers) => answers.options == 'Add Employee',
+        validate: (value) => {
+            if(value.split(' ').length != 2) return `Please enter a first and last name only.`
+            if (typeof value == "string" && value.trim().length != 0 && value.indexOf(' ') != -1 && (/\d/.test(value) == false)) return true
+            else return `Please enter the first and last name for the employee before continuing. `
+        }
+    },
+    {
+        type: 'list',
+        name: 'chooseRole',
+        message: 'Please select a role for the employee: ',
+        choices: roles,
+        when: (answers) => answers.employeeName
+    },
+    {
+        type: 'list',
+        name: 'managerYN',
+        message: 'Does this person have a manger?',
+        choices: ['Yes','No'],
+        when: (answers) => answers.chooseRole
+    },
+    {
+        type: 'list',
+        name: 'chooseManager',
+        message: 'Please select a manager: ',
+        choices: managers,
+        when: (answers) => {
+            if(answers.managerYN == 'Yes') return true
+            else return false
+        }
     }
 ]
 
@@ -101,4 +138,4 @@ function init() {
         })
 }
 
-export { init, departments }
+export { init, departments, roles, managers }

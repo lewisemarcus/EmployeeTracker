@@ -1,5 +1,6 @@
 import { viewEmRouter } from '../../routes/viewEmployees.js'
 import { newRoleRouter } from '../../routes/newRole.js'
+import { newEmRouter } from '../../routes/newEmployee.js'
 import { viewRolesRouter } from '../../routes/viewRoles.js'
 import { viewDeptRouter } from '../../routes/viewDepartments.js'
 import { newDeptRouter } from '../../routes/newDepartment.js'
@@ -15,6 +16,8 @@ app.use(express.json())
 app.use(express.static('public'))
 
 app.use('/api/newRole', newRoleRouter)
+
+app.use('/api/newEmployee', newEmRouter)
 
 app.use('/api/viewRoles', viewRolesRouter)
 
