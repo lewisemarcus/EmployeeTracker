@@ -23,9 +23,13 @@ const updateManager = (employee) =>
 
 updateManagerRouter.put('/', ({ body }, res) => {
 
+    const employeeId = body.selectEmployee.split(", ")[0]
+
+    const managerName = body.updateManager.split(", ")[1]
+
     const sql = `UPDATE employees
-    SET manager = "${body.updateManager}"
-    WHERE full_name = '${body.selectEmployee}';`
+    SET manager = "${managerName}"
+    WHERE employee_id = '${employeeId}';`
 
     db.query(sql, (err) => {
         if (err) console.error(err)
