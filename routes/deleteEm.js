@@ -21,8 +21,9 @@ const deleteEm = (employee) =>
         .catch((error) => console.error('Error:', error))
 
 delEmRouter.delete('/', ({ body }, res) => {
+    const employeeId = body.deleteEm.split(", ")[0]
     const sql = `DELETE FROM employees
-    WHERE full_name='${body.deleteEm}'`
+    WHERE employee_id='${employeeId}'`
 
     db.query(sql, (err) => {
         if (err) console.error(err)

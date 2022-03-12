@@ -21,8 +21,9 @@ const deleteRole = (role) =>
         .catch((error) => console.error('Error:', error))
 
 delRoleRouter.delete('/', ({ body }, res) => {
+    const roleId = body.deleteRole.split(", ")[0]
     const sql = `DELETE FROM titles
-    WHERE title_name='${body.deleteRole}'`
+    WHERE title_id='${roleId}'`
 
     db.query(sql, (err) => {
         if (err) console.error(err)

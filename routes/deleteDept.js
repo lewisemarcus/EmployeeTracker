@@ -21,8 +21,9 @@ const deleteDept = (department) =>
         .catch((error) => console.error('Error:', error))
 
 delDeptRouter.delete('/', ({ body }, res) => {
+    const deptId = body.deleteDept.split(", ")[0]
     const sql = `DELETE FROM departments
-    WHERE department_name='${body.deleteDept}'`
+    WHERE department_id='${deptId}'`
 
     db.query(sql, (err) => {
         if (err) console.error(err)
