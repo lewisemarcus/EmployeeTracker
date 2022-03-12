@@ -87,7 +87,7 @@ const questions = [
         message: `'Please enter the employee's first and last name(separated by a space): `,
         when: (answers) => answers.options == 'Add Employee',
         validate: (value) => {
-            if (value.split(' ').length != 2 || value.split(' ').length != 3) return `Please enter a first and last name only.`
+            if (value.split(' ').length != 2) return `Please enter a first and last name only.`
             if (typeof value == "string" && value.trim().length != 0 && value.indexOf(' ') != -1 && (/\d/.test(value) == false)) return true
             else return `Please enter the first and last name for the employee before continuing. `
         }

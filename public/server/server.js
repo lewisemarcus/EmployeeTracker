@@ -73,7 +73,6 @@ const updateEmployees = () => db.query(employeeSql, (err, result) => {
     //Gathers all roles, seeds and new, into list for display in inquirer.
     for (let each of result)
       if (employees.indexOf(each.employee_id) == -1) employees.push(`${each.employee_id}, ${each.full_name}`)
-
     return employees
   }
 })

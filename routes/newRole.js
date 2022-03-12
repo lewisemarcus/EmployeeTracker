@@ -23,13 +23,15 @@ const addRole = (role) =>
         .catch((error) => console.error('Error:', error))
 
 newRoleRouter.post('/', ({ body }, res) => {
+    const departmentId = body.chooseDepartment.split(", ")[0]
     const getIdsql = `SELECT * FROM departments
-    WHERE department_name='${body.chooseDepartment}';`
+    WHERE department_id='${departmentId}';`
 
     //Query to retrieve department_id 
     db.query(getIdsql, (err, result) => {
         if (err) console.error(err)
         else {
+            console.log(result)
             const { department_id, department_name } = result[0]
             const newTitle = capitalizeFirstLetter(body.addTitle)
             const sql = `INSERT INTO titles
