@@ -17,7 +17,7 @@ const viewRoles = () =>
         .then((data) => {
             init()
             return data
-            
+
         })
         .catch((error) => console.error('Error:', error))
 

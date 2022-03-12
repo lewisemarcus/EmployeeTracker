@@ -31,7 +31,7 @@ const employeeSql = `SELECT full_name, employee_id from employees;`
 const updateDepts = () => db.query(deptSql, (err, result) => {
   if (err) console.error(err)
   else {
-    
+
     //Gathers all departments, seeds and new, into list for display in inquirer.
     for (let each of result)
       if (departments.indexOf(`${each.department_id}, ${each.department_name}`) == -1) departments.push(`${each.department_id}, ${each.department_name}`)

@@ -16,7 +16,7 @@ const viewEmployees = () =>
         .then((response) => response.json())
         .then((data) => {
             init()
-            return data       
+            return data
         })
         .catch((error) => console.error('Error:', error))
 
@@ -25,19 +25,19 @@ viewEmRouter.get('/', (req, res) => {
     const sql = `SELECT employees.employee_id, employees.full_name, employees.title, employees.manager, titles.salary, titles.department_id
     FROM employees 
     INNER JOIN titles ON titles.title_id=employees.title_id;`
-    
+
     db.query(sql, (err, result) => {
         if (err) console.error(err)
         else {
-            
-        //Sends a json response containing a success note and the list of employees.
-        res.json({
-            message: 'success',
-            data: result
-        })
 
-        //Logs the table of employees to the user's console for viewing.
-        console.log(`\r\n${cTable.getTable(result)}`)
+            //Sends a json response containing a success note and the list of employees.
+            res.json({
+                message: 'success',
+                data: result
+            })
+
+            //Logs the table of employees to the user's console for viewing.
+            console.log(`\r\n${cTable.getTable(result)}`)
         }
     })
 })
