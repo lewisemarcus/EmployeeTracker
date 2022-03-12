@@ -1,11 +1,12 @@
+import { updateRole } from '../../routes/updateRole.js'
 import { viewEmployees } from '../../routes/viewEmployees.js'
 import { addRole } from '../../routes/newRole.js'
 import { addEmployee } from '../../routes/newEmployee.js'
 import { viewRoles, getRoles } from '../../routes/viewRoles.js'
 import { viewDepartments, getDepartments, seeDepartments } from '../../routes/viewDepartments.js'
 import { addDept } from '../../routes/newDepartment.js'
-import { updateRole } from '../../routes/updateEmployeeRole.js'
 import inquirer from 'inquirer'
+
 const departments = []
 const roles = []
 const managers = []
@@ -78,7 +79,7 @@ const questions = [
         message: `'Please enter the employee's first and last name(separated by a space): `,
         when: (answers) => answers.options == 'Add Employee',
         validate: (value) => {
-            if(value.split(' ').length != 2) return `Please enter a first and last name only.`
+            if(value.split(' ').length != 2 || value.split(' ').length != 3) return `Please enter a first and last name only.`
             if (typeof value == "string" && value.trim().length != 0 && value.indexOf(' ') != -1 && (/\d/.test(value) == false)) return true
             else return `Please enter the first and last name for the employee before continuing. `
         }
@@ -117,7 +118,7 @@ const questions = [
     {
         type: 'list',
         name: 'updateRole',
-        message: 'Please select a new role for the employee: ',
+        message: 'Please select a role for the employee: ',
         choices: roles,
         when: (answers) => answers.chooseEmployee
     }
@@ -145,7 +146,7 @@ function init() {
                 case 'Add Employee':
                     addEmployee(choice)
                     break
-                case 'Update Employee Info':
+                case 'Update Employee Role':
                     updateRole(choice)
                     break
                 case 'Quit':

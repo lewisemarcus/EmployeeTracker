@@ -23,6 +23,7 @@ const addRole = (role) =>
         .catch((error) => console.error('Error:', error))
 
 newRoleRouter.post('/', ({ body }, res) => {
+    console.log(body)
     const getIdsql = `SELECT * FROM departments
     WHERE department_name='${body.chooseDepartment}';`
 
@@ -53,7 +54,6 @@ newRoleRouter.post('/', ({ body }, res) => {
                         })
 
                         //Logs the table of titles to the user's console for viewing.
-                        console.log(result)
                         console.log(`\r\nRole Added:\r\n${cTable.getTable(result)}`)
 
                         //Update role list.

@@ -45,6 +45,7 @@ newEmRouter.post('/', ({ body }, res) => {
                 db.query(managerSql, (err, result) => {
                     if (err) console.error(err)
                     else {
+                        
                         //Query to display employees.
                         db.query(`SELECT full_name FROM employees;`, (err, result) => {
 
