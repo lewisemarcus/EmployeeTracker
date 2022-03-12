@@ -16,9 +16,9 @@ VALUES ("Marcus Lewis", 1),
     ("Jessi Magana", 2),
     ("Rejean Chung", 3);
 
-INSERT INTO employees (employee_id, first_name, last_name, title, manager, manager_id)
-VALUES (1,"Marcus","Lewis","Lead Engineer", null, null),
-    (2,"Jason", "Yoo", "Sales Intern", "Marcus Lewis", 1),
-    (3, "Benjamin", "Wirth", "Sales Tech", "Jessi Magana", 2),
-    (4, "Rejean", "Chung", "Legal Team Manager", null, null),
-    (5, "Jessi", "Magana", "Sales Lead", null, null);
+INSERT INTO employees (employee_id, first_name, last_name, title, title_id, manager, manager_id)
+VALUES (1,"Marcus","Lewis","Lead Engineer", 1, null, null),
+    (2,"Jason", "Yoo", "Sales Intern", 2, "Marcus Lewis", 1),
+    (3, "Benjamin", "Wirth", "Sales Tech", 3, "Jessi Magana", 2),
+    (4, "Rejean", "Chung", "Legal Team Manager", 5, null, null),
+    (5, "Jessi", "Magana", "Sales Lead", 4, null, null);

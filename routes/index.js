@@ -29,8 +29,9 @@ const loadEmployees = () =>
 indexRouter.get('/', (req, res) => {
 
     //Displays employees in console once database connection is established.
-    db.query(`SELECT employee_id, full_name, title, manager 
-    FROM employees;`, (err, result) => {
+    db.query(`SELECT employees.employee_id, employees.full_name, employees.title, employees.manager, titles.salary, titles.department_id
+    FROM employees 
+    INNER JOIN titles ON titles.title_id=employees.title_id;`, (err, result) => {
         if (err) console.error(err)
         else {
             res.json({

@@ -27,7 +27,6 @@ newEmRouter.post('/', ({ body }, res) => {
     const first_name = capitalizeFirstLetter(nameArray[0]), last_name = capitalizeFirstLetter(nameArray[1])
     const full_name = first_name + last_name
 
-
     if (body.managerYN == 'Yes') {
 
         const employeeSql = `INSERT INTO employees
@@ -45,7 +44,7 @@ newEmRouter.post('/', ({ body }, res) => {
                 db.query(managerSql, (err, result) => {
                     if (err) console.error(err)
                     else {
-                        
+
                         //Query to display employees.
                         db.query(`SELECT full_name FROM employees;`, (err, result) => {
 
